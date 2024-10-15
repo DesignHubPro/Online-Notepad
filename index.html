@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Notepad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .buttons button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .create-btn {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .create-btn:hover {
+            background-color: #0056b3;
+        }
+        .share-btn {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .share-btn:hover {
+            background-color: #218838;
+        }
+        .options {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .options label {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Online Notepad</h2>
+        <textarea id="note" placeholder="Type your note here..."></textarea>
+        <div class="buttons">
+            <button class="create-btn" onclick="createNote()">Create Note</button>
+            <button class="share-btn" onclick="showOptions()">Share Note</button>
+        </div>
+        <div class="options" id="shareOptions">
+            <label>
+                <input type="radio" name="access" value="edit" checked> Editable
+            </label>
+            <label>
+                <input type="radio" name="access" value="read-only"> Read-only
+            </label>
+            <button onclick="generateShareLink()">Copy Share Link</button>
+        </div>
+    </div>
+
+    <script>
+        function createNote() {
+            const note = document.getElementById('note').value;
+            if (note.trim() === '') {
+                alert('Please write something in the note.');
+            } else {
+                alert('Note created successfully!');
+            }
+        }
+
+        function showOptions() {
+            document.getElementById('shareOptions').style.display = 'flex';
+        }
+
+        function generateShareLink() {
+            const accessType = document.querySelector('input[name="access"]:checked').value;
+            const note = document.getElementById('note').value;
+            if (note.trim() === '') {
+                alert('Please write something in the note before sharing.');
+                return;
+            }
+            const shareLink = `https://example.com/note?content=${encodeURIComponent(note)}&access=${accessType}`;
+            navigator.clipboard.writeText(shareLink).then(() => {
+                alert('Share link copied to clipboard!');
+            }, () => {
+                alert('Failed to copy the link.');
+            });
+        }
+    </script>
+</body>
+</html>
