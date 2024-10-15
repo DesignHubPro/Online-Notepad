@@ -109,12 +109,13 @@
                 alert('Please write something in the note before sharing.');
                 return;
             }
-            const shareLink = `https://example.com/note?content=${encodeURIComponent(note)}&access=${accessType}`;
-            navigator.clipboard.writeText(shareLink).then(() => {
-                alert('Share link copied to clipboard!');
-            }, () => {
-                alert('Failed to copy the link.');
-            });
+            const shareLink = `https://designhubpro.github.io/Online-Notepad/?content=${encodeURIComponent(note)}&access=${accessType}`;
+navigator.clipboard.writeText(shareLink).then(() => {
+    alert('Share link copied to clipboard!');
+}, () => {
+    alert('Failed to copy the link.');
+});
+
         }
     </script>
 </body>
